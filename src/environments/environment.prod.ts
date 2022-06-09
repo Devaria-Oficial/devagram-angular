@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  devagramUrlApi: 'https://devagram-node-nextjs.vercel.app/api'
 };

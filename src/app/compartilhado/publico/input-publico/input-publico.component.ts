@@ -21,7 +21,6 @@ export class InputPublicoComponent implements OnInit {
   public aoModificarCampo(event: any): void {
     this.referenciaFormulario?.setValue(event);
     this.referenciaFormulario?.markAsDirty();
-    console.log(event);
   }
 
   public obterMensagemErro(): string {
@@ -33,6 +32,18 @@ export class InputPublicoComponent implements OnInit {
       return 'Campo obrigatorio!';
     }
 
-    return 'Problemas no preenchimento!';
+    if (this.referenciaFormulario?.errors['email']) {
+      return 'Insira um e-mail válido!';
+    }
+
+    if (this.referenciaFormulario?.errors['minlength']) {
+      return `Deve ter no mínino ${this.referenciaFormulario.errors['minlength'].requiredLength} caracteres!`;
+    }
+
+    if (this.referenciaFormulario?.errors['confirmacaoSenha']) {
+      return 'As senhas não conferem!';
+    }
+
+    return '';
   }
 }

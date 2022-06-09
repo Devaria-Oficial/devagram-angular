@@ -34,4 +34,10 @@
     &:disabled {
         opacity: 0.5;
     }
+
+    &.botaoPublico {
+        margin-top: 40px;
+        padding: 12px;
+        font-size: 16px;
+    }
 }

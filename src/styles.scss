@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/fonts/fonts.scss';
+@import './assets/estilos/variaveis.scss';
 
 :root {
     --fontRegular: 'Biennale Regular';
@@ -16,6 +17,9 @@
     --cinza3: #4D4C4D;
     --cinza4: #333333;
     --branco: #FFF;
+    --vermelho: #FF0000;
+
+    --breakpointDesktop: 992px;
 }
 
 * {
@@ -31,4 +35,34 @@ body {
 
 .oculto {
     display: none !important;
+}
+
+input {
+    &::placeholder,
+    &:-ms-input-placeholder,
+    &::-ms-input-placeholder {
+        color: var(--cinza2);
+    }
+}
+
+.mensagemErro {
+    color: var(--vermelho);
+    margin: 5px 0 0;
+    font-size: 90%;
+}
+
+.desktop {
+    display: none;
+
+    @media screen and (min-width: $breakpointDesktop) {
+        display: block;
+    }
+}
+
+.mobile {
+    display: block;
+
+    @media screen and (min-width: $breakpointDesktop) {
+        display: none !important;
+    }
 }
