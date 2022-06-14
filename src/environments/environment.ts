@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  devagramUrlApi: 'https://devagram-node-nextjs.vercel.app/api'
+  devagramUrlApi: 'https://devagram-nodejs-next.vercel.app/api'
 };
 
 /*
