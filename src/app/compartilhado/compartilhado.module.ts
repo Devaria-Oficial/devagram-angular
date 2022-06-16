@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BotaoComponent } from './botao/botao.component';
-import { AvatarComponent } from './avatar/avatar.component';
-import { UploadImagemComponent } from './upload-imagem/upload-imagem.component';
-import { InputPublicoComponent } from './publico/input-publico/input-publico.component';
-import { PaginaPublicaComponent } from './publico/pagina-publica/pagina-publica.component';
-import { RodapePaginaPublicaComponent } from './publico/rodape-pagina-publica/rodape-pagina-publica.component';
+import { BotaoComponent } from './componentes/botao/botao.component';
+import { AvatarComponent } from './componentes/avatar/avatar.component';
+import { UploadImagemComponent } from './componentes/upload-imagem/upload-imagem.component';
+import { InputPublicoComponent } from './componentes/publico/input-publico/input-publico.component';
+import { PaginaPublicaComponent } from './componentes/publico/pagina-publica/pagina-publica.component';
+import { RodapePaginaPublicaComponent } from './componentes/publico/rodape-pagina-publica/rodape-pagina-publica.component';
+import { FeedComponent } from './componentes/feed/feed.component';
+import { PostagemComponent } from './componentes/feed/postagem/postagem.component';
 
 
 
@@ -32,7 +34,9 @@ import { RodapePaginaPublicaComponent } from './publico/rodape-pagina-publica/ro
     UploadImagemComponent,
     InputPublicoComponent,
     PaginaPublicaComponent,
-    RodapePaginaPublicaComponent
+    RodapePaginaPublicaComponent,
+    FeedComponent,
+    PostagemComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,8 @@ import { RodapePaginaPublicaComponent } from './publico/rodape-pagina-publica/ro
     UploadImagemComponent,
     InputPublicoComponent,
     PaginaPublicaComponent,
-    RodapePaginaPublicaComponent
+    RodapePaginaPublicaComponent,
+    FeedComponent
   ]
 })
 export class CompartilhadoModule { }

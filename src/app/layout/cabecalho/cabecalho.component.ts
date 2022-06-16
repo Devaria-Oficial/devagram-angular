@@ -27,6 +27,7 @@ export class CabecalhoComponent implements OnInit {
   }
 
   public async pesquisarUsuarios(): Promise<void> {
+    this.resultadoDaPesquisa = [];
     if (this.termoPesquisado.length < 3) {
       return;
     }
@@ -37,20 +38,7 @@ export class CabecalhoComponent implements OnInit {
       );
 
       const usuarioLogado = this.servicoAutenticacao.obterUsuarioLogado();
-      // this.resultadoDaPesquisa = usuariosRetornados.filter(ur => ur._id !== usuarioLogado?.id);
-      this.resultadoDaPesquisa = [
-        {
-          _id: '93284098324',
-          nome: 'Nome Fulano',
-          email: 'email@email.com'
-        } as UsuarioDevagram,
-        {
-          _id: '932840983242',
-          nome: 'Nome Fulano 2',
-          email: 'email@email2.com'
-        } as UsuarioDevagram
-      ]
-      console.log(usuariosRetornados);
+      this.resultadoDaPesquisa = usuariosRetornados.filter(ur => ur._id !== usuarioLogado?.id);
     } catch (e: any) {
       if (e?.status !== 400) {
         alert(e?.error.erro || 'Erro ao pesquisar usuarios!');

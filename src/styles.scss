@@ -83,3 +83,15 @@ body {
         flex: 1;
     }
 }
+
+strong {
+    font-size: 12px;
+    color: var(--cinza4);
+}
+
+.conteudoDesktop {
+    @media screen and (min-width: $breakpointDesktop) {
+        width: 30%;
+        margin: auto;
+    }
+}
