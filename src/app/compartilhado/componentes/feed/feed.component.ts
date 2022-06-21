@@ -1,51 +1,64 @@
-import { UsuarioLogado } from './../../../autenticacao/usuario-logado.type';
-import { AutenticacaoService } from 'src/app/autenticacao/autenticacao.service';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UsuarioDevagram } from './../../tipos/usuario-devagram.type';
+import { UsuarioLogado } from '../../autenticacao/usuario-logado.type';
+import { AutenticacaoService } from 'src/app/compartilhado/autenticacao/autenticacao.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Postagem } from './postagem.type';
+import { FeedService } from './feed.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnChanges {
 
+  @Input() usuario?: UsuarioDevagram | null;
   public usuarioLogado: UsuarioLogado | null;
-  public postagens: Array<Postagem> = [
-    {
-      quantidadeCurtidas: 32,
-      descricao: 'Olá mundo! Eu sou o Daniel Castello. Aqui pra vocês, Dani! A minha carreira foi sempre focada',
-      comentarios: [
-        {
-          nome: 'Rafael Mazzucato',
-          comentario: 'is weeeee'
-        },
-        {
-          nome: 'Kaique Jesus',
-          comentario: 'Salveeee'
-        }
-      ],
-      usuario: {
-        nome: 'Daniel Castello'
-      },
-      foto: 'https://www.petz.com.br/blog/wp-content/uploads/2020/04/diferenca-entre-aves-e-passaros.jpg'
-    } as Postagem,
-    {
-      quantidadeCurtidas: 32,
-      descricao: 'Olá mundo! Eu sou o Kaique Jesus, aqui pra vocês, Ka! Bllablalba blablabla 2 blablabla 3 blablabla 4',
-      usuario: {
-        nome: 'Kaique Jesus'
-      },
-      foto: 'https://www.petz.com.br/blog/wp-content/uploads/2020/01/passaros-domesticos.jpg'
-    } as Postagem
-  ];
+  public postagens: Array<Postagem> = [];
 
-  constructor(private servicoAutenticacao: AutenticacaoService) {
+  constructor(
+      private servicoAutenticacao: AutenticacaoService,
+      private servicoFeed: FeedService,
+      private serviceRotaAtiva: ActivatedRoute
+    ) {
     this.usuarioLogado = this.servicoAutenticacao.obterUsuarioLogado();
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['usuario'].previousValue !== changes['usuario'].currentValue) {
+      this.carregarPostagens();
+    }
   }
 
- 
+  ngOnInit(): void {
+    this.carregarPostagens();
+  }
+
+  async carregarPostagens() {
+    try {
+      let idUsuario = '';
+      if (this.usuario === null) {
+        return;
+      } else if (this.usuario) {
+        idUsuario = this.usuario._id;
+      }
+
+      const postagensApi = await this.servicoFeed.carregarPostagens(
+        idUsuario
+      );
+
+      this.postagens = postagensApi.map(postagem => ({
+        ...postagem,
+        usuario: postagem.usuario || {
+          nome: this.usuario?.nome,
+          avatar: this.usuario?.avatar
+        },
+        estaCurtido: postagem.likes.includes(this.usuarioLogado?.id || ''),
+        quantidadeCurtidas: postagem.likes.length
+      }) as Postagem);
+    } catch (e: any) {
+      alert(e.error?.erro || 'Erro ao carregar o feed!');
+    }
+  }
 }

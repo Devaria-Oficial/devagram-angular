@@ -9,6 +9,7 @@ import { ItemMenu } from './item-menu.type';
 })
 export class NavegacaoComponent implements OnInit {
 
+  private rotaAtiva: string = 'home';
   private mapaDeRotas: ItemMenu = {
     home: {
       img: 'home',
@@ -35,9 +36,13 @@ export class NavegacaoComponent implements OnInit {
 
   public obterImagem(menu: string): string {
     const rotaMenu = this.mapaDeRotas[menu];
-    const icone = rotaMenu.rotas.includes(this.router.url)
-      ? `${rotaMenu.img}Ativo`
-      : rotaMenu.img;
+
+    let icone = rotaMenu.img;
+    if (rotaMenu.rotas.includes(this.router.url)
+      || this.rotaAtiva === menu) {
+      icone = `${rotaMenu.img}Ativo`;
+      this.rotaAtiva = menu;
+    }
 
     return `assets/imagens/${icone}.svg`;
   }

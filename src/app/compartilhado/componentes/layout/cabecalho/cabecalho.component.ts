@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioDevagram } from 'src/app/compartilhado/tipos/usuario-devagram.type';
 import { DevagramUsuarioApiService } from 'src/app/compartilhado/servicos/devagram-usuario-api.service';
-import { AutenticacaoService } from 'src/app/autenticacao/autenticacao.service';
+import { AutenticacaoService } from 'src/app/compartilhado/autenticacao/autenticacao.service';
 
 @Component({
   selector: 'app-cabecalho',
@@ -47,6 +47,6 @@ export class CabecalhoComponent implements OnInit {
   }
 
   public irParaOPerfilDoUsuario(idUsuario: string): void {
-    console.log({idUsuario});
+    this.router.navigate(['perfil', idUsuario]);
   }
 }

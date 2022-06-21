@@ -42,6 +42,10 @@
             align-items: center;
             margin-bottom: 8px;
 
+            > img {
+                cursor: pointer;
+            }
+
             .iconeComentario {
                 margin-left: 8px;
                 margin-right: 8px;
@@ -68,6 +72,7 @@
             .exibirMais {
                 font-size: 12px;
                 color: var(--corPrimaria2);
+                cursor: pointer;
             }
         }
 
@@ -104,6 +109,10 @@
             color: var(--corPrimaria);
             font-size: 14px;
             border: none;
+
+            &:disabled {
+                opacity: 0.85;
+            }
         }
     }
 

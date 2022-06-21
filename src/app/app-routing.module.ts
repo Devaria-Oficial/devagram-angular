@@ -1,4 +1,4 @@
-import { AutenticacaoGuard } from './autenticacao/autenticacao.guard';
+import { AutenticacaoGuard } from './compartilhado/autenticacao/autenticacao.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,6 +10,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'perfil',
+    canActivate: [AutenticacaoGuard],
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule)
   },
   {
     path: '',

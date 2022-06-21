@@ -13,6 +13,9 @@ import { PaginaPublicaComponent } from './componentes/publico/pagina-publica/pag
 import { RodapePaginaPublicaComponent } from './componentes/publico/rodape-pagina-publica/rodape-pagina-publica.component';
 import { FeedComponent } from './componentes/feed/feed.component';
 import { PostagemComponent } from './componentes/feed/postagem/postagem.component';
+import { CabecalhoComponent } from './componentes/layout/cabecalho/cabecalho.component';
+import { RodapeComponent } from './componentes/layout/rodape/rodape.component';
+import { NavegacaoComponent } from './componentes/layout/navegacao/navegacao.component';
 
 
 
@@ -36,7 +39,10 @@ import { PostagemComponent } from './componentes/feed/postagem/postagem.componen
     PaginaPublicaComponent,
     RodapePaginaPublicaComponent,
     FeedComponent,
-    PostagemComponent
+    PostagemComponent,
+    CabecalhoComponent,
+    RodapeComponent,
+    NavegacaoComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +57,9 @@ import { PostagemComponent } from './componentes/feed/postagem/postagem.componen
     InputPublicoComponent,
     PaginaPublicaComponent,
     RodapePaginaPublicaComponent,
-    FeedComponent
+    FeedComponent,
+    CabecalhoComponent,
+    RodapeComponent
   ]
 })
 export class CompartilhadoModule { }
