@@ -5,13 +5,25 @@
             alt="Seta Esquerda"
             class="mobile"
             (click)="voltarParaHome()"
+            *ngIf="!estaPerfilPessoal"
         />
     
         <h3>{{ usuario?.nome }}</h3>
+
+        <img 
+            src="assets/imagens/logout.svg"
+            alt="Icone Logout"
+            (click)="logout()"
+            *ngIf="estaPerfilPessoal"
+        />
     </div>
 
+    <hr class="linhaHorizontal" />
+
     <div class="estatisticas">
-        <app-avatar [src]="usuario?.avatar"></app-avatar>
+        <app-avatar
+            [src]="usuario?.avatar"
+            classeCss="avatarPerfil"></app-avatar>
 
         <div class="conteudoEstatisticas">
             <div class="numeros">
@@ -28,8 +40,12 @@
                     <span>Seguindo</span>
                 </div>
             </div>
+
             <app-botao
-                texto="Seguir"
+                classeCss="btnCabecalhoPerfil"
+                [cor]="obterCorBotaoPrincipal()"
+                [texto]="obterTextoBotaoPrincipal()"
+                (click)="manipularCliqueBotaoPrincipal()"
             ></app-botao>
         </div>
     </div>

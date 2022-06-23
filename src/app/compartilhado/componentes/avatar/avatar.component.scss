@@ -7,10 +7,22 @@
     object-fit: cover;
     margin-right: 8px;
 
+    &.avatarPerfil {
+        height: 80px;
+        width: 80px;
+        margin-right: 20px;
+    }
+
     @media screen and (min-width: $breakpointDesktop) {
         &.feedDesktop {
             height: 50px;
             width: 50px;
+        }
+
+        &.avatarPerfil {
+            height: 120px;
+            width: 120px;
+            margin-right: 40px;
         }
     }
 }
