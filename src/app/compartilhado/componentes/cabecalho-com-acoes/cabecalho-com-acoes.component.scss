@@ -32,9 +32,19 @@
         }
     }
 
+    &.cabecalhoComAcoesPublicacao {
+        h3 {
+            padding-left: 50px;
+        }
+    }
+
     @media screen and (min-width: $breakpointDesktop) {
         .textoAcaoEsquerda {
             font-size: 14px;
+            cursor: pointer;
+        }
+
+        .iconeEsquerda {
             cursor: pointer;
         }
 

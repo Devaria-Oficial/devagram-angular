@@ -1,8 +1,9 @@
-<div class="cabecalhoComAcoes">
+<div [ngClass]="['cabecalhoComAcoes', classeCss]">
     <img
         *ngIf="srcImagemEsquerda" 
         [src]="srcImagemEsquerda"
         alt="Icone Esquerda"
+        class="iconeEsquerda"
         (click)="aoClicarAcaoEsquerda.emit()"
     />
 

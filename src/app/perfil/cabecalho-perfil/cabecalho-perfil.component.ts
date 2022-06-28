@@ -1,5 +1,5 @@
 import { AutenticacaoService } from 'src/app/compartilhado/autenticacao/autenticacao.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioDevagram } from './../../compartilhado/tipos/usuario-devagram.type';
 import { Component, Input, OnInit } from '@angular/core';
 import { DevagramUsuarioApiService } from 'src/app/compartilhado/servicos/devagram-usuario-api.service';
@@ -16,14 +16,17 @@ export class CabecalhoPerfilComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private rotaAtiva: ActivatedRoute,
     private servicoUsuario: DevagramUsuarioApiService,
     private servicoAutenticacao: AutenticacaoService
   ) { }
 
   ngOnInit(): void {
-    if (this.router.url === '/perfil/pessoal') {
-      this.estaPerfilPessoal = true;
-    }
+    this.rotaAtiva.url.subscribe(() => {
+      if (this.router.url === '/perfil/pessoal') {
+        this.estaPerfilPessoal = true;
+      }
+    })
   }
 
   public async manipularCliqueBotaoPrincipal(): Promise<void> {
@@ -40,14 +43,18 @@ export class CabecalhoPerfilComponent implements OnInit {
   }
 
   private async alternarSeguir() {
-    // TODO: atualizar a quantidade de seguidores
-    
     if (!this.usuario) {
       return;
     }
 
     try {
       await this.servicoUsuario.alternarSeguir(this.usuario._id);
+      if (this.usuario.segueEsseUsuario) {
+        this.usuario.seguidores--;
+      } else {
+        this.usuario.seguidores++;
+      }
+
       this.usuario.segueEsseUsuario = !this.usuario.segueEsseUsuario;
     } catch (e: any) {
       alert(e.error?.erro || 'Erro ao seguir/deixar de seguir o usuário!');
@@ -67,7 +74,6 @@ export class CabecalhoPerfilComponent implements OnInit {
   }
 
   public obterTextoBotaoPrincipal(): string {
-    // TODO: corrigir bug da exibição do texto errado do botão
     if (this.estaPerfilPessoal) {
       return 'Editar perfil';
     }

@@ -21,4 +21,8 @@ export class DevagramUsuarioApiService extends DevagramApiService {
   public alternarSeguir(idUsuario: string) {
     return this.put('seguir?id=' + idUsuario, {});
   }
+
+  public atualizarPerfil(dados: any) {
+    return this.put('usuario', dados);
+  }
 }

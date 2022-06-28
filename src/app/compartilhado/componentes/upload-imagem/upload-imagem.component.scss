@@ -48,4 +48,22 @@
             }
         }
     }
+
+    &.paginaPublicacao {
+        .imagemPrevisualizacaoPublicacao,
+        .imagemPrevisualizacaoPublicacao2Etapa {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            
+            &.imagemPrevisualizacaoPublicacao {
+                margin-bottom: 20px;
+            }
+
+            @media screen and (min-width: $breakpointDesktop) {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
 }

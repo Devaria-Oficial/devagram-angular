@@ -1,0 +1,59 @@
+<div class="layoutInterno">
+    <app-cabecalho class="desktop"></app-cabecalho>
+
+    <div class="conteudoInterno conteudoDesktop" [formGroup]="form">
+        <div class="containerPublicacao">
+            <app-cabecalho-com-acoes
+                titulo="Nova publicação"
+                [classeCss]="obterClasseCssCabecalho()"
+                [srcImagemEsquerda]="obterImagemEsquerda()"
+                [textoAcaoDireita]="obterTextoAcaoDireita()"
+                [desabilitarAcaoDireita]="verificarHabilitacaoAcaoDireita()"
+                (aoClicarAcaoDireita)="manipularCliqueAcaoDireita()"
+                (aoClicarAcaoEsquerda)="manipularCliqueAcaoEsquerda()"
+            >
+            </app-cabecalho-com-acoes>
+
+            <hr class="linhaHorizontal" />
+
+            <div class="conteudoPublicacao">
+                <div class="primeiraEtapa"
+                    *ngIf="estaNaPrimeiraEtapa()">
+                    <app-upload-imagem
+                        [referenciaFormulario]="obterReferenciaInput('file')"
+                        [imagemPrevisualizacao]="obterImagemPrevisualizacao()"
+                        classeCssImagemPrevisualizacao="imagemPrevisualizacaoPublicacao"
+                        classeCssContainer="paginaPublicacao"
+                        (aoAtualizarImagem)="armazenarImagemPrevisualizacao($event)"
+                    >
+                        <span class="textoArraste desktop">Arraste sua foto aqui!</span>
+                        <app-botao
+                            texto="Selecione uma imagem"
+                            classeCss="botaoPublicacao"
+                        ></app-botao>
+                    </app-upload-imagem>
+                </div>
+
+                <div class="segundaEtapa"
+                    *ngIf="estaNaSegundaEtapa()">
+                    
+                    <app-upload-imagem
+                        [referenciaFormulario]="obterReferenciaInput('file')"
+                        [imagemPrevisualizacao]="obterImagemPrevisualizacao()"
+                        classeCssImagemPrevisualizacao="imagemPrevisualizacaoPublicacao2Etapa"
+                        classeCssContainer="paginaPublicacao"
+                        (aoAtualizarImagem)="armazenarImagemPrevisualizacao($event)"
+                    >
+                    </app-upload-imagem>
+
+                    <textarea
+                        placeholder="Escreva uma legenda..."
+                        formControlName="descricao"
+                        rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-rodape></app-rodape>
+</div>
